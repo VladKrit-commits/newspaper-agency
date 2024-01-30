@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+
+{% block content %}
+  <h1>
+    Newspapers List
+    <a href="{% url 'agency:newspapers-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h1>
+  <form class="form-inline" action="" method="get">
+    {{ search_form|crispy }}
+    <input class="btn btn-secondary" type="submit" value="Search">
+  </form>
+
+  {% if newspapers_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Topic</th>
+        <th>Published at</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+
+      {% for newspaper in newspapers_list %}
+        <tr>
+          <td>
+              {{ newspaper.id }}
+          </td>
+          <td>
+              {{ newspaper.title }}
+          </td>
+          <td>
+              {{ newspaper.topic }}
+          </td>
+          <td>
+              {{ newspaper.published_date }}
+          </td>
+          <td>
+              <a href="{% url 'agency:newspapers-update' pk=newspaper.id %}">
+                Update
+              </a>
+            </td>
+            <td>
+              <a style="color: red"
+                href="{% url 'agency:newspapers-delete' pk=newspaper.id %}">
+                Delete
+              </a>
+            </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+  {% else %}
+      <p>There are no newspapers in the agency.</p>
+  {% endif %}
+{% endblock %}

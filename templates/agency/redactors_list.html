@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+
+{% block content %}
+  <h1>
+    Redactors List
+    <a href="{% url 'agency:redactors-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h1>
+  <form class="form-inline" action="" method="get">
+    {{ search_form|crispy }}
+    <input class="btn btn-secondary" type="submit" value="Search">
+  </form>
+
+  {% if redactors_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Years of experience</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+
+      {% for redactor in redactors_list %}
+        <tr>
+          <td>
+              {{ redactor.id }}
+          </td>
+          <td>
+              {{ redactor.username }}
+          </td>
+          <td>
+              {{ redactor.email }}
+          </td>
+          <td>
+              {{ redactor.years_of_experience }}
+          </td>
+          <td>
+              <a href="{% url 'agency:redactors-update' pk=redactor.id %}">
+                Update
+              </a>
+            </td>
+            <td>
+              <a style="color: red"
+                href="{% url 'agency:redactor-delete' pk=redactor.id %}">
+                Delete
+              </a>
+            </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+  {% else %}
+      <p>There are no redactors in the agency.</p>
+  {% endif %}
+{% endblock %}
