@@ -14,7 +14,7 @@ class Topic(models.Model):
 
 
 class Redactor(AbstractUser):
-    years_of_experience = models.IntegerField()
+    years_of_experience = models.IntegerField(null=True, blank=True)
 
     class Meta:
         verbose_name = "redactor"
@@ -23,8 +23,8 @@ class Redactor(AbstractUser):
     def __str__(self):
         return f"{self.username} ({self.first_name} {self.last_name})"
 
-    # def get_absolute_url(self):
-    #     return reverse("agency:redactor-detail", kwargs={"pk": self.pk})
+    def get_absolute_url(self):
+        return reverse("agency:redactor-detail", kwargs={"pk": self.pk})
 
 
 class Newspaper(models.Model):
