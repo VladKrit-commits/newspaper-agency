@@ -52,6 +52,12 @@ class NewspapersListView(LoginRequiredMixin, generic.ListView):
         return queryset
 
 
+class NewspapersDetailView(LoginRequiredMixin, generic.DeleteView):
+    model = Newspaper
+    context_object_name = "newspapers"
+    template_name = "agency/newspapers_detail.html"
+
+
 class NewspapersCreateView(LoginRequiredMixin, generic.CreateView):
     model = Newspaper
     fields = "__all__"
@@ -64,11 +70,14 @@ class NewspapersUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Newspaper
     fields = "__all__"
     success_url = reverse_lazy("agency:newspapers-list")
+    context_object_name = "newspapers"
+    template_name = "agency/newspapers_form.html"
 
 
 class NewspapersDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Newspaper
     success_url = reverse_lazy("agency:newspapers-list")
+    context_object_name = "newspapers"
 
 
 class RedactorsListView(LoginRequiredMixin, generic.ListView):
@@ -83,6 +92,7 @@ class RedactorsListView(LoginRequiredMixin, generic.ListView):
         context["search_form"] = RedactorsSearchForm(
             initial={"username": username}
         )
+        return context
 
     def get_queryset(self):
         queryset = self.model.objects.all()
@@ -94,17 +104,18 @@ class RedactorsListView(LoginRequiredMixin, generic.ListView):
 
 class RedactorsCreateView(LoginRequiredMixin, generic.CreateView):
     model = Redactor
-    fields = "__all__"
+    fields = "username", "password", "first_name", "last_name", "years_of_experience"
     success_url = reverse_lazy("agency:redactors-list")
-    context_object_name = "redactors_form"
+    context_object_name = "redactors"
     template_name = "agency/redactors_form.html"
 
 
 class RedactorsUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Redactor
-    fields = "__all__"
+    fields = "username", "password", "first_name", "last_name", "years_of_experience"
     success_url = reverse_lazy("agency:redactors-list")
     template_name = "agency/redactors_form.html"
+    context_object_name = "redactors"
 
 
 class RedactorsDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -120,9 +131,9 @@ class RedactorsDetailView(LoginRequiredMixin, generic.DeleteView):
 
 class TopicsListView(LoginRequiredMixin, generic.ListView):
     model = Topic
-    paginate_by = 5
     context_object_name = "topics_list"
     template_name = "agency/topics_list.html"
+    paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TopicsListView, self).get_context_data(**kwargs)
@@ -130,6 +141,7 @@ class TopicsListView(LoginRequiredMixin, generic.ListView):
         context["search_form"] = TopicsSearchForm(
             initial={"name": name}
         )
+        return context
 
     def get_queryset(self):
         queryset = self.model.objects.all()
@@ -137,6 +149,12 @@ class TopicsListView(LoginRequiredMixin, generic.ListView):
         if name:
             return queryset.filter(name__icontains=name)
         return queryset
+
+
+class TopicsDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Topic
+    context_object_name = "topics_detail"
+    template_name = "agency/topics_detail.html"
 
 
 class TopicsCreateView(LoginRequiredMixin, generic.CreateView):
@@ -151,9 +169,12 @@ class TopicsUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Topic
     fields = "__all__"
     success_url = reverse_lazy("agency:topics-list")
+    context_object_name = "topics"
+    template_name = "agency/topics_form.html"
 
 
 class TopicsDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Topic
     success_url = reverse_lazy("agency:topics-list")
+    template_name = "agency/topics_confirm_delete.html"
 
