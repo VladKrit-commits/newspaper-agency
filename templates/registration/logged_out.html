@@ -1,7 +1,10 @@
-{% extends "base.html" %}
+{% extends "layouts/base_sections.html" %}
 
 {% block content %}
-<p>Logged out!</p>
+<div class="container mt-7">
+  <h3 class="h3">Logged out!</h3>
 
-<a href="{% url 'login'%}">Click here to login again.</a>
+  <a class="link mt-6" href="{% url 'login'%}">Click here to login again.</a>
+
+</div>
 {% endblock %}
