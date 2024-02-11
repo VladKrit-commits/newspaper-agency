@@ -1,0 +1,36 @@
+{% extends "layouts/base_sections.html" %}
+
+{% block content %}
+<section class="vh-lg-100 mt-7 bg-soft d-flex align-items-center" xmlns="http://www.w3.org/1999/html">
+  <div class="container">
+    <div class="row form-bg-image">
+      <div class="col-12 d-flex align-items-center">
+        <div class="signin-inner my-3 my-lg-0 bg-white shadow border-0 rounded p-4 p-lg-5 w-100 fmxw-500 ms-0 text-start">
+          <h1>
+          {{ topic.name }}
+          <a href="{% url 'agency:newspapers-delete' pk=newspapers.id %}" class="btn btn-danger link-to-page">
+            Delete
+          </a>
+
+          <a href="{% url 'agency:newspapers-update' pk=newspapers.id %}" class="btn btn-primary link-to-page ">
+            Update
+          </a>
+        </h1>
+        <p><strong>Newspaper topic: {{ newspapers.topic }}</strong></p>
+        <h4>Content:</h4>
+        <p>{{ newspapers.content }}</p>
+        <h4>
+          Redactors: 
+        </h4>
+        <hr>
+        <ul>
+          {% for redactor in newspapers.publishers.all %}
+            <li>{{ redactor.username }} ({{ redactor.first_name }} {{ redactor.last_name }})</li>
+          {% endfor %}
+        </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
