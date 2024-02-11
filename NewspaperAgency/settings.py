@@ -126,7 +126,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = (BASE_DIR, "static",)
+STATICFILES_DIRS = (BASE_DIR, "agency/static",)
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
