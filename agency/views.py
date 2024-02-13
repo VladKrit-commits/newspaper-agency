@@ -177,4 +177,3 @@ class TopicsDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Topic
     success_url = reverse_lazy("agency:topics-list")
     template_name = "agency/topics_confirm_delete.html"
-
