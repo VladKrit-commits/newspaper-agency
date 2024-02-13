@@ -54,8 +54,8 @@ class NewspapersListView(LoginRequiredMixin, generic.ListView):
 
 class NewspapersDetailView(LoginRequiredMixin, generic.DeleteView):
     model = Newspaper
-    context_object_name = "newspapers"
     template_name = "agency/newspapers_detail.html"
+    context_object_name = "newspapers"
 
 
 class NewspapersCreateView(LoginRequiredMixin, generic.CreateView):
@@ -70,14 +70,12 @@ class NewspapersUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Newspaper
     fields = "__all__"
     success_url = reverse_lazy("agency:newspapers-list")
-    context_object_name = "newspapers"
     template_name = "agency/newspapers_form.html"
 
 
 class NewspapersDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Newspaper
     success_url = reverse_lazy("agency:newspapers-list")
-    context_object_name = "newspapers"
 
 
 class RedactorsListView(LoginRequiredMixin, generic.ListView):
@@ -106,7 +104,6 @@ class RedactorsCreateView(LoginRequiredMixin, generic.CreateView):
     model = Redactor
     fields = "username", "password", "first_name", "last_name", "years_of_experience"
     success_url = reverse_lazy("agency:redactors-list")
-    context_object_name = "redactors"
     template_name = "agency/redactors_form.html"
 
 
@@ -115,7 +112,6 @@ class RedactorsUpdateView(LoginRequiredMixin, generic.UpdateView):
     fields = "username", "password", "first_name", "last_name", "years_of_experience"
     success_url = reverse_lazy("agency:redactors-list")
     template_name = "agency/redactors_form.html"
-    context_object_name = "redactors"
 
 
 class RedactorsDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -125,8 +121,8 @@ class RedactorsDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class RedactorsDetailView(LoginRequiredMixin, generic.DeleteView):
     model = Redactor
-    context_object_name = "redactors"
     template_name = "agency/redactor_detail.html"
+    context_object_name = "redactors"
 
 
 class TopicsListView(LoginRequiredMixin, generic.ListView):
@@ -169,7 +165,6 @@ class TopicsUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Topic
     fields = "__all__"
     success_url = reverse_lazy("agency:topics-list")
-    context_object_name = "topics"
     template_name = "agency/topics_form.html"
 
 
