@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from agency.models import Topic, Newspaper, Redactor
+from agency.models import Topic, Newspaper
 
 
 class ModelsTests(TestCase):

@@ -5,8 +5,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import TopicsSearchForm, RedactorsSearchForm, NewspapersSearchForm
-from .models import Topic, Redactor, Newspaper
+from agency.forms import TopicsSearchForm, RedactorsSearchForm, NewspapersSearchForm
+from agency.models import Topic, Redactor, Newspaper
 
 
 @login_required
