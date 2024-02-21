@@ -131,17 +131,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-# STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATIC_ROOT = "staticfiles/"
 
-# STATICFILES_DIRS = [
-    # BASE_DIR / "F:/PortfolioProjects/NewspaperAgency/agency/static",
-# ]
-
-STATIC_URL = '/static/'
-
 STATICFILES_DIRS = [
-    '/opt/render/project/src/agency/static',
+    BASE_DIR / "static",
 ]
 
 
