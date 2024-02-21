@@ -135,7 +135,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = "staticfiles/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'agency/static',
+    BASE_DIR / 'static',
 ]
 
 # Default primary key field type
