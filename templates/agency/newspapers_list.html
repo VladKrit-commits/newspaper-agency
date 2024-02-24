@@ -1,0 +1,85 @@
+{% extends "layouts/base_sections.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<header class="header-2" xmlns="http://www.w3.org/1999/html">   <div class="page-header min-vh-75 relative" style="background-image: url('{% static 'img/curved-images/curved15.jpg' %}')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 text-center mx-auto">
+        <h1 class="text-white pt-3 mt-n5">Newspapers Agency</h1>
+        <p class="lead text-white mt-3">List with newspapers <br/></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="position-absolute w-100 z-index-1 bottom-0">
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
+      <defs>
+        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+      </defs>
+      <g class="moving-waves">
+        <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40" />
+        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.35)" />
+        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)" />
+        <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)" />
+        <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
+        <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,0.95" />
+      </g>
+    </svg>
+  </div>
+</div>
+</header>
+
+<section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
+  <div class="container">
+    <div class="row form-bg-image">
+      <div class="col-12 d-flex align-items-center">
+        <div class="signin-inner my-3 my-lg-0 bg-white shadow border-0 rounded p-4 p-lg-5 w-100 fmxw-500 ms-0 text-start">
+          <h1>
+            Newspapers
+            <a href="{% url 'agency:newspapers-create' %}" class="btn btn-primary link-to-page">Create</a>
+          </h1>
+          <h1 class="h3">Choose a newspaper</h1>
+          <form method="get" action="" class="form-inline">
+            {{ search_form.as_p }}
+            <input type="submit" class="btn btn-secondary" value="Search">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
+  <div class="container">
+    <div class="row form-bg-image">
+      <div class="col-12 d-flex align-items-center">
+        <div class="signin-inner my-3 my-lg-0 bg-white shadow border-0 rounded p-4 p-lg-5 w-100 fmxw-500 ms-0 text-start">
+          {% if newspapers_list %}
+          <table class="table">
+            <tr>
+              <th class="alert alert-dark text-white font-weight-bold">About newspaper</th>
+              <th class="alert alert-dark text-white font-weight-bold">Title</th>
+              <th class="alert alert-dark text-white font-weight-bold">Published date</th>
+              <th class="alert alert-dark text-white font-weight-bold">Topic</th>
+            </tr>
+            {% for newspaper in newspapers_list %}
+            <tr>
+              <td class="alert alert-success text-white font-weight-bold link"><a href="{% url 'agency:newspapers-detail' pk=newspaper.id %}">More info</a></td>
+              <td class="alert alert-secondary text-white font-weight-bold">{{ newspaper.title }}</td>
+              <td class="alert alert-secondary text-white font-weight-bold">{{ newspaper.published_date }}</td>
+              <td class="alert alert-secondary text-white font-weight-bold">{{ newspaper.topic }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+          {% else %}
+          <p>There are no newspapers!</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
